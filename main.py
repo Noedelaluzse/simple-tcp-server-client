@@ -1,18 +1,18 @@
-import socket 
+from client import start_client
+from serverApp import start_server
 import threading
+import time
 
-HOST = '127.0.0.1' # Localhost
-PORT = 5001 # Cambiar el puerto 5000
+def main():
+    print("Iniciando servidor en segundo plano...")
+    server_thread = threading.Thread(target=start_server, daemon=True)
+    server_thread.start()
 
-def start_server():
-  with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as server:
-    server.bind((HOST, PORT))
-    server.listen()
-    print(f"Server listening on {HOST}:{PORT}")
-    while True:
-      connection, address = server.accept()
-      client_thread = threading.Thread(target=server, args=(connection, address))
-      client_thread.start()
+    # Espera opcional para dar tiempo a que el servidor arranque
+    time.sleep(1)
+
+    print("Iniciando cliente...")
+    start_client()
 
 if __name__ == "__main__":
-  start_server()
+    main()
