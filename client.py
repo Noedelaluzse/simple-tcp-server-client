@@ -1,7 +1,7 @@
 import socket
 
 HOST = '127.0.0.1'  # Localhost
-PORT = 5001  # Cambiar el puerto 5000
+PORT = 5000  # Cambiar el puerto 5000
 
 def start_client():
   with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as client:
